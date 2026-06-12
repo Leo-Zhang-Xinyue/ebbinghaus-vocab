@@ -42,7 +42,8 @@
       justify-content: space-between;
       z-index: 100;
     }
-    .nav-logo { font-size: 17px; font-weight: 800; color: var(--primary); letter-spacing: -0.3px; }
+    .nav-logo { font-size: 17px; font-weight: 800; color: var(--primary); letter-spacing: -0.3px; display: flex; align-items: center; gap: 8px; }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 7px; }
     .nav-cta {
       background: var(--primary);
       color: #fff;
@@ -88,6 +89,25 @@
       margin: 0 auto 36px;
       line-height: 1.7;
     }
+    .import-sources {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 24px;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 32px;
+    }
+    .import-source { font-size: 14px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .import-source span { color: var(--muted); }
+    .import-divider { color: var(--border); font-size: 18px; }
     .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
       background: var(--primary);
@@ -263,7 +283,8 @@
       max-width: 960px;
       margin: 0 auto;
     }
-    .footer-logo { font-size: 15px; font-weight: 700; color: var(--primary); }
+    .footer-logo { font-size: 15px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+    .footer-logo img { width: 22px; height: 22px; border-radius: 5px; }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
     .footer-links a:hover { color: var(--primary); }
@@ -281,15 +302,26 @@
 
   <!-- Nav -->
   <nav>
-    <span class="nav-logo">⚡ EbbinghausVocab</span>
+    <span class="nav-logo"><img src="icon.png" alt="EbbinghausVocab icon" />EbbinghausVocab</span>
     <a class="nav-cta" href="#pricing">Get Pro</a>
   </nav>
 
   <!-- Hero -->
   <div class="hero">
-    <div class="hero-badge">Spaced repetition · AI-powered</div>
-    <h1>Learn vocabulary<br />that actually <span>sticks</span></h1>
-    <p>EbbinghausVocab uses spaced repetition science and AI to help you build a lasting vocabulary in any language.</p>
+    <div class="hero-badge"><img src="icon.png" alt="" style="width:16px;height:16px;border-radius:4px;vertical-align:middle;margin-right:6px;" />Spaced repetition · AI-powered</div>
+    <h1>From textbook, webpage,<br />or PDF — to <span>long-term memory</span></h1>
+    <p>Capture words from anywhere, let AI fill in the details, and review with spaced repetition science. Build a vocabulary that actually sticks.</p>
+
+    <div class="import-sources">
+      <div class="import-source">📸 <span>Photo</span></div>
+      <div class="import-divider">·</div>
+      <div class="import-source">🌐 <span>Webpage</span></div>
+      <div class="import-divider">·</div>
+      <div class="import-source">📄 <span>PDF</span></div>
+      <div class="import-divider">·</div>
+      <div class="import-source">✏️ <span>Manual</span></div>
+    </div>
+
     <div class="hero-actions">
       <a class="btn-primary" href="#pricing">Get Pro</a>
       <a class="btn-secondary" href="https://apps.apple.com" target="_blank">Download Free</a>
@@ -365,6 +397,16 @@
     </div>
   </section>
 
+  <!-- Chrome extension callout -->
+  <section>
+    <div class="extension-callout">
+      <div style="font-size:36px;margin-bottom:16px;">🌐</div>
+      <h2>Save words while you browse</h2>
+      <p>The free EbbinghausVocab Chrome extension lets you select any word on any webpage, look it up instantly, and add it to your vocabulary list — without leaving the tab.</p>
+      <a class="btn-primary" href="https://chrome.google.com/webstore" target="_blank">Add to Chrome — Free</a>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section id="pricing" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
     <div class="section-label">Pricing</div>
@@ -374,7 +416,7 @@
 
       <div class="pricing-card">
         <div class="plan-name">Free</div>
-        <div class="plan-price">$0 <span>/ forever</span></div>
+        <div class="plan-price">£0 <span>/ forever</span></div>
         <div class="plan-desc">Everything you need to build a vocabulary habit.</div>
         <ul class="plan-features">
           <li>Unlimited words & projects</li>
@@ -393,7 +435,7 @@
       <div class="pricing-card pro">
         <div class="pro-tag">Most popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price">$4.99 <span>/ month</span></div>
+        <div class="plan-price">£3.99 <span>/ month</span></div>
         <div class="plan-desc">AI features included — no API key required.</div>
         <ul class="plan-features">
           <li>Everything in Free</li>
@@ -411,19 +453,9 @@
     </div>
   </section>
 
-  <!-- Chrome extension callout -->
-  <section>
-    <div class="extension-callout">
-      <div style="font-size:36px;margin-bottom:16px;">🌐</div>
-      <h2>Save words while you browse</h2>
-      <p>The free EbbinghausVocab Chrome extension lets you select any word on any webpage, look it up instantly, and add it to your vocabulary list — without leaving the tab.</p>
-      <a class="btn-primary" href="https://chrome.google.com/webstore" target="_blank">Add to Chrome — Free</a>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer>
-    <span class="footer-logo">⚡ EbbinghausVocab</span>
+    <span class="footer-logo"><img src="icon.png" alt="" />EbbinghausVocab</span>
     <div class="footer-links">
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="mailto:leo.arrowlong@gmail.com">Contact</a>

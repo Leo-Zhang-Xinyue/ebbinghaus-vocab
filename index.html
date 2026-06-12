@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EbbinghausVocab — Learn vocabulary that sticks</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #5B67CA;
+      --primary-dark: #4B57BA;
+      --primary-light: #EEF2FF;
+      --accent: #7C3AED;
+      --bg: #F8F9FF;
+      --card: #ffffff;
+      --text: #1A1A2E;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(248, 249, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+    }
+    .nav-logo { font-size: 17px; font-weight: 800; color: var(--primary); letter-spacing: -0.3px; }
+    .nav-cta {
+      background: var(--primary);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--primary-dark); }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 72px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 0.3px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--primary); }
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 12px;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: #fff;
+      color: var(--primary);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      transition: border-color 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--primary); transform: translateY(-1px); }
+
+    /* ── Section ── */
+    section { padding: 72px 24px; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -0.5px;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto 52px;
+      line-height: 1.7;
+    }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .feature-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .feature-icon { font-size: 28px; margin-bottom: 14px; }
+    .feature-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── How it works ── */
+    .steps { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .step { display: flex; gap: 20px; align-items: flex-start; }
+    .step-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .step-body p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Pricing ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 32px;
+      border: 1.5px solid var(--border);
+    }
+    .pricing-card.pro {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      position: relative;
+    }
+    .pro-tag {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .plan-name { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+    .plan-price { font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 4px; }
+    .plan-price span { font-size: 16px; font-weight: 500; color: var(--muted); }
+    .plan-desc { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-features li { font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+    .plan-features li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+    .plan-features li.muted { color: var(--muted); }
+    .plan-features li.muted::before { content: '–'; color: var(--border); }
+    .plan-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .plan-btn:hover { transform: translateY(-1px); }
+    .plan-btn-outline {
+      border: 2px solid var(--border);
+      color: var(--text);
+    }
+    .plan-btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+    .plan-btn-filled {
+      background: var(--primary);
+      color: #fff;
+    }
+    .plan-btn-filled:hover { background: var(--primary-dark); }
+
+    /* ── Extension callout ── */
+    .extension-callout {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .extension-callout h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+    .extension-callout p { font-size: 15px; color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .footer-logo { font-size: 15px; font-weight: 700; color: var(--primary); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--muted); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 56px 20px 52px; }
+      section { padding: 52px 20px; }
+      .extension-callout { padding: 28px 20px; }
+      footer { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <span class="nav-logo">⚡ EbbinghausVocab</span>
+    <a class="nav-cta" href="#pricing">Get Pro</a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">Spaced repetition · AI-powered</div>
+    <h1>Learn vocabulary<br />that actually <span>sticks</span></h1>
+    <p>EbbinghausVocab uses spaced repetition science and AI to help you build a lasting vocabulary in any language.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#pricing">Get Pro</a>
+      <a class="btn-secondary" href="https://apps.apple.com" target="_blank">Download Free</a>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <section id="features" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need to learn faster</h2>
+    <p class="section-sub">Built around the Ebbinghaus forgetting curve — the gold standard in memory science.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <div class="feature-title">Spaced Repetition</div>
+        <div class="feature-desc">The SM-2 algorithm schedules each word at the perfect moment — right before you'd forget it.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <div class="feature-title">AI Fill-in</div>
+        <div class="feature-desc">Tap a button and AI generates the definition, translation, phonetics, and example sentences instantly.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <div class="feature-title">Photo Annotation Extraction</div>
+        <div class="feature-desc">Photograph a textbook page and AI extracts every annotated word or phrase automatically.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <div class="feature-title">AI PDF Reading</div>
+        <div class="feature-desc">Upload a PDF and AI pulls out the key vocabulary words worth studying on each page.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Chrome Extension</div>
+        <div class="feature-desc">Select any word on any webpage, look it up, and save it to your vocab list without leaving the tab.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <div class="feature-title">Any Language</div>
+        <div class="feature-desc">Supports 17 languages including Spanish, French, Japanese, Arabic, Latin, and more.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Simple by design</h2>
+    <p class="section-sub">From word to long-term memory in three steps.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Add a word</h3>
+          <p>Type it, photograph it, or select it in your browser. AI fills in the definition, translation, and examples in seconds.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Review daily</h3>
+          <p>The app shows you exactly which words need reviewing today — no more, no less. Each session takes minutes.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Remember forever</h3>
+          <p>The spaced repetition algorithm gradually extends review intervals until each word is in long-term memory.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Start free, go further with Pro</h2>
+    <p class="section-sub">The core app is free forever. Pro unlocks AI features without needing your own API key.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="plan-name">Free</div>
+        <div class="plan-price">$0 <span>/ forever</span></div>
+        <div class="plan-desc">Everything you need to build a vocabulary habit.</div>
+        <ul class="plan-features">
+          <li>Unlimited words & projects</li>
+          <li>Spaced repetition flashcards</li>
+          <li>Dictionary & Wiktionary lookup</li>
+          <li>Chrome extension</li>
+          <li>Sync across devices</li>
+          <li>17 supported languages</li>
+          <li class="muted">AI Fill-in</li>
+          <li class="muted">Photo annotation extraction</li>
+          <li class="muted">AI PDF reading</li>
+        </ul>
+        <a class="plan-btn plan-btn-outline" href="https://apps.apple.com" target="_blank">Download Free</a>
+      </div>
+
+      <div class="pricing-card pro">
+        <div class="pro-tag">Most popular</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$4.99 <span>/ month</span></div>
+        <div class="plan-desc">AI features included — no API key required.</div>
+        <ul class="plan-features">
+          <li>Everything in Free</li>
+          <li>AI Fill-in (one tap)</li>
+          <li>Photo annotation extraction</li>
+          <li>AI PDF reading</li>
+          <li>Managed AI — no API key needed</li>
+        </ul>
+        <a class="plan-btn plan-btn-filled"
+          href="mailto:leo.arrowlong@gmail.com?subject=EbbinghausVocab%20%E2%80%94%20Upgrade%20to%20Pro&body=Hi%2C%0A%0AI'd%20like%20to%20upgrade%20my%20account%20to%20Pro.%0A%0AMy%20account%20email%3A%20">
+          Upgrade to Pro →
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Chrome extension callout -->
+  <section>
+    <div class="extension-callout">
+      <div style="font-size:36px;margin-bottom:16px;">🌐</div>
+      <h2>Save words while you browse</h2>
+      <p>The free EbbinghausVocab Chrome extension lets you select any word on any webpage, look it up instantly, and add it to your vocabulary list — without leaving the tab.</p>
+      <a class="btn-primary" href="https://chrome.google.com/webstore" target="_blank">Add to Chrome — Free</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-logo">⚡ EbbinghausVocab</span>
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="mailto:leo.arrowlong@gmail.com">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>

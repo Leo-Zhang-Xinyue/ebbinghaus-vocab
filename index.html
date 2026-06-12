@@ -258,38 +258,27 @@
     }
     .plan-btn-filled:hover { background: var(--primary-dark); }
 
-    /* ── Billing toggle ── */
-    .billing-toggle {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 36px;
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 5px;
-      max-width: 280px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 36px;
-    }
-    .billing-btn {
-      flex: 1;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      border: none;
-      background: none;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s;
+    /* ── Billing options ── */
+    .pro-billing-options { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+    .billing-option {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: #fff;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s, transform 0.1s;
     }
-    .billing-btn.active { background: #fff; color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .billing-option:hover { border-color: var(--primary); transform: translateY(-1px); }
+    .billing-option-best { border-color: var(--primary); background: var(--primary-light); }
+    .billing-option-left { display: flex; flex-direction: column; gap: 3px; }
+    .billing-option-name { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .billing-option-price { font-size: 13px; color: var(--muted); }
+    .billing-option-equiv { font-size: 11px; color: var(--primary); font-weight: 600; margin-left: 4px; }
+    .billing-option-cta { font-size: 13px; font-weight: 700; color: var(--primary); white-space: nowrap; }
     .save-badge {
       background: #D1FAE5;
       color: #065F46;
@@ -454,14 +443,6 @@
     <h2 class="section-title">Start free, go further with Pro</h2>
     <p class="section-sub">The core app is free forever. Pro unlocks AI features without needing your own API key.</p>
 
-    <!-- Billing toggle -->
-    <div class="billing-toggle">
-      <button class="billing-btn active" id="btn-monthly" onclick="setBilling('monthly')">Monthly</button>
-      <button class="billing-btn" id="btn-yearly" onclick="setBilling('yearly')">
-        Yearly <span class="save-badge">2 months free</span>
-      </button>
-    </div>
-
     <div class="pricing-grid">
 
       <div class="pricing-card">
@@ -485,7 +466,6 @@
       <div class="pricing-card pro">
         <div class="pro-tag">Most popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price" id="pro-price">£3.99 <span>/ month</span></div>
         <div class="plan-desc">AI features included — no API key required.</div>
         <ul class="plan-features">
           <li>Everything in Free</li>
@@ -494,29 +474,26 @@
           <li>AI PDF reading</li>
           <li>Managed AI — no API key needed</li>
         </ul>
-        <a class="plan-btn plan-btn-filled" id="pro-btn"
-          href="https://buy.stripe.com/test_14AeVdfit6xe9j17yWcwg00">
-          Upgrade to Pro →
-        </a>
+        <div class="pro-billing-options">
+          <a class="billing-option" href="https://buy.stripe.com/test_14AeVdfit6xe9j17yWcwg00">
+            <div class="billing-option-left">
+              <div class="billing-option-name">Monthly</div>
+              <div class="billing-option-price">£3.99 / month</div>
+            </div>
+            <span class="billing-option-cta">Get Pro →</span>
+          </a>
+          <a class="billing-option billing-option-best" href="https://buy.stripe.com/test_14AeVdfit6xe9j17yWcwg00">
+            <div class="billing-option-left">
+              <div class="billing-option-name">Yearly <span class="save-badge">2 months free</span></div>
+              <div class="billing-option-price">£39.99 / year <span class="billing-option-equiv">£3.33/mo</span></div>
+            </div>
+            <span class="billing-option-cta">Get Pro →</span>
+          </a>
+        </div>
       </div>
 
     </div>
   </section>
-
-  <script>
-    const MONTHLY_LINK = 'https://buy.stripe.com/test_14AeVdfit6xe9j17yWcwg00';
-    const YEARLY_LINK  = 'https://buy.stripe.com/test_14AeVdfit6xe9j17yWcwg00'; // replace with yearly link
-
-    function setBilling(type) {
-      const isYearly = type === 'yearly';
-      document.getElementById('btn-monthly').classList.toggle('active', !isYearly);
-      document.getElementById('btn-yearly').classList.toggle('active', isYearly);
-      document.getElementById('pro-price').innerHTML = isYearly
-        ? '£39.99 <span>/ year</span>'
-        : '£3.99 <span>/ month</span>';
-      document.getElementById('pro-btn').href = isYearly ? YEARLY_LINK : MONTHLY_LINK;
-    }
-  </script>
 
   <!-- Footer -->
   <footer>

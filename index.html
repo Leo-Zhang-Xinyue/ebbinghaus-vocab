@@ -236,6 +236,8 @@
     .plan-features li::before { content: '✓'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
     .plan-features li.muted { color: var(--muted); }
     .plan-features li.muted::before { content: '–'; color: var(--border); }
+    .plan-features li.section-divider { color: var(--muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 6px; }
+    .plan-features li.section-divider::before { content: none; }
     .plan-btn {
       display: block;
       width: 100%;
@@ -456,6 +458,7 @@
           <li>Chrome extension</li>
           <li>Sync across devices</li>
           <li>17 supported languages</li>
+          <li class="section-divider">Free to set up your own AI API to enable:</li>
           <li class="muted">AI Fill-in</li>
           <li class="muted">Photo annotation extraction</li>
           <li class="muted">AI PDF reading</li>
